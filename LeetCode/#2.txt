@@ -1,0 +1,44 @@
+//https://leetcode.com/problems/add-two-numbers/?envType=problem-list-v2&envId=linked-list
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        //Create dummy node as head
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        int count = 0;
+
+        while(l1!=null || l2!=null || count!=0){
+            int x = 0;
+            if(l1!=null){
+                x = l1.val;
+                l1 = l1.next;
+            }
+            int y = 0;
+            if(l2!=null){
+                y = l2.val;
+                l2 = l2.next;
+            }
+            int sum = x+y+count;
+            // Calculate new count (if sum >= 10)
+            count = sum/10;
+
+            curr.next = new ListNode(sum%10);
+            curr = curr.next;
+        }
+        return dummy.next;
+
+        /*
+        Input: l1 = [2,4,3], l2 = [5,6,4]
+        Output: [7,0,8]
+
+        Input: 
+            l1 = 2->4->3 (number 342)
+            l2 = 5->6->4 (number 465)
+
+        Process:
+            - First: 2+5=7, carry=0 -> node 7
+            - Next: 4+6=10, carry=1 -> node 0
+            - Last: 3+4+1=8, carry=0 -> node 8
+
+        Output: 7->0->8*/
+    }
+}
